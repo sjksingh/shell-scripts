@@ -1,0 +1,11 @@
+#!/bin/bash
+# Backup only employees and test db.
+mydumper -u root --password='gonuts' --regex '^(employees\.|mysql\.)'   --outputdir /backups/
+
+
+# NOT to Backup  employees and test db.
+#mydumper -u root --password='gonuts' --regex '^(?!(employees\.|test\.))'   --outputdir /backups/
+
+
+# NOT to Backup dbs starting with tets
+#mydumper -u root --password='gonuts' --regex '^(?!(test))'   --outputdir /backups/
