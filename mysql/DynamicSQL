@@ -1,0 +1,12 @@
+--- Generate Dynamic SQL 
+sudo mysql -sN information_schema <<EOF
+tee /home/ubuntu/scripts/output.txt
+SELECT CONCAT('alter table'),t.table_name,concat('auto_increment=',t.auto_increment+10000,';')
+from TABLES t
+JOIN COLUMNS c ON t.TABLE_name = c.TABLE_name
+WHERE t.TABLE_SCHEMA = 'workboard_new'
+and c.EXTRA = 'auto_increment'
+and c.COLUMN_NAME IN  ('id','user_id')
+AND AUTO_INCREMENT IS NOT NULL;
+notee;
+EOF
